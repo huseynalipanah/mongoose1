@@ -2,7 +2,6 @@ import express from "express";
 import mongoose, { Schema } from "mongoose";
 import bcrypt from "bcrypt";
 
-
 const usersSchema = new Schema({
   Username: {
     type: String,
@@ -65,7 +64,7 @@ const validateUser = (user) => {
 const usersModel = mongoose.model("users", usersSchema);
 
 const app = express();
-const port =  3000;
+const port = 3000;
 
 app.use(express.json());
 
@@ -80,12 +79,11 @@ app.post("/users", async (req, res, next) => {
   try {
     validateUser(req.body);
     await newUser.save();
-    next(); 
+    res.send("ugurla yarandi");
   } catch (err) {
-    res.status(400).send(err.message); 
+    res.status(400).send(err.message);
   }
 });
-
 
 app.put("/users/:id", async (req, res) => {
   const { id } = req.params;
@@ -113,7 +111,7 @@ app.delete("/users/:id", async (req, res) => {
 });
 
 mongoose
-  .connect('mongodb+srv://huz3yn:huseyn04ru@hakunamatata.wsdwnh9.mongodb.net/')
+  .connect("mongodb+srv://huz3yn:huseyn04ru@hakunamatata.wsdwnh9.mongodb.net/")
   .then(() => console.log("Connected!"))
   .catch((err) => console.log("Not Connected!"));
 
